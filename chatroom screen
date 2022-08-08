@@ -1,0 +1,34 @@
+screen nvl(dialogue, items=None):
+    window:
+        xsize 1000 xalign .5
+        style "nvl_window"
+        vbox:
+            spacing 40
+            use nvl_dialogue(dialogue)
+
+        for i in items:
+            textbutton i.caption:
+                action i.action
+                style "nvl_button"
+
+    add SideImage("phone_send_icon") xalign 0.0 yalign 1.0
+
+screen nvl_dialogue(dialogue):
+    for d in dialogue:
+        window:
+            id d.window_id
+            hbox:
+                xsize 1000 xalign 1.0
+                if d.who is not None:
+                    frame:
+                        xsize 300 background None
+                        text d.who:
+                            xalign 1.0
+                            id d.who_id
+                frame:
+                    xalign 1.0 xsize 800 
+                    text d.what:
+                        align(.5,.5)
+                        id d.what_id
+
+define config.nvl_list_length = 10
